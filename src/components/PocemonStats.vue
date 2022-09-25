@@ -33,6 +33,7 @@ export default {
     margin: 0;
   }
   @media screen and (max-width: 460px) {
+    line-height: 1.15;
     width: 130px;
   }
 }
@@ -40,10 +41,10 @@ export default {
   font-size: 18px;
   font-family: Stick-Regular;
   @media screen and (max-width: 670px) {
-    font-size: 16px;
+    font-size: 15x;
   }
   @media screen and (max-width: 460px) {
-    font-size: 14px;
+    font-size: 13px;
   }
 }
 .pocemon__stat-count {
