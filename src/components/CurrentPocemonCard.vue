@@ -145,8 +145,8 @@ export default {
     margin: 50px auto;
   }
   @media screen and (max-width: 460px) {
-    width: 300px;
-    height: 300px;
+    width: 307px;
+    height: 307px;
   }
 }
 .pocemon__id {
@@ -190,7 +190,7 @@ export default {
   }
   @media screen and (max-width: 460px) {
     display: flex;
-    margin-top: 10px;
+    margin-top: 14px;
   }
 }
 .pocemon__stats-wrapp {

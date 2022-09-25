@@ -37,7 +37,7 @@ a {
   max-width: 1110px;
   margin: 0 auto;
   @media screen and (max-width: 1150px) {
-    max-width: 95%;
+    max-width: 96%;
   }
 }
 </style>

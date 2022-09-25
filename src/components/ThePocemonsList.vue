@@ -7,7 +7,7 @@
         :pocemon="pocemon"
       />
   </div>
-  <SmallLoader v-if="isSmallLoader"/>
+  <SmallLoader v-if="isSmallLoader  && isLoading"/>
   <div ref="observer" class="observer"></div>
 </template>
 

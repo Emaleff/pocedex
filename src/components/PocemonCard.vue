@@ -7,11 +7,13 @@
     </router-link>
     <div class="pocemon__number"># {{ pocemon.id }}</div>
     <div class="pocemon__name">{{ pocemon.name }}</div>
+    <div class="pocemon__types">
     <pocemon-type
       v-for="types in pocemon.types"
       :types="types"
       :key="types.slot"
     />
+    </div>
   </div>
 </template>
 
@@ -69,5 +71,8 @@ export default {
 .pocemon__name {
   font-size: 22px;
   font-family: BungeeSpice-Regular;
+}
+.pocemon__types{
+  display: flex;flex-direction: column;align-items: center;
 }
 </style>
