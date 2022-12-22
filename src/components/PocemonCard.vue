@@ -1,36 +1,32 @@
 <template>
   <div class="pocemon__card">
-    <router-link :to="{ name: 'pocemonPage', params: { id: pocemon.id } }" >
-      <div class="pocemon__img-wrapp">
-        <img :src="pocemon.sprites.front_default" alt="" class="pocemon__img" />
-      </div>
-    </router-link>
-    <div class="pocemon__number"># {{ pocemon.id }}</div>
-    <div class="pocemon__name">{{ pocemon.name }}</div>
+    <!-- <router-link :to="{ name: 'pocemonPage', params: { id: pocemon.id } }" > -->
+    <div class="pocemon__img-wrapp">
+      <img :src="props.pocemon.sprites.front_default" alt="" class="pocemon__img" />
+    </div>
+    <!-- </router-link> -->
+    <div class="pocemon__number"># {{ props.pocemon.id }}</div>
+    <div class="pocemon__name">{{ props.pocemon.name }}</div>
     <div class="pocemon__types">
-    <pocemon-type
-      v-for="types in pocemon.types"
-      :types="types"
-      :key="types.slot"
-    />
+      <pocemon-type v-for="types in props.pocemon.types" :types="types" :key="types.slot" />
     </div>
   </div>
 </template>
 
-<script>
+<script lang="ts" setup>
+import { defineProps } from "vue";
+import {TPocemonTypes} from "../types/Tpocemons"
 import PocemonType from "@/components/PocemonType.vue";
-export default {
-  name: "PocemonCard",
-  components: {
-    PocemonType,
-  },
-  props: {
-    pocemon: {
-      type: Object,
-      required: true,
-    },
-  },
-};
+const props = defineProps<{
+  pocemon: {
+    id: number,
+    name :string, 
+    types: TPocemonTypes,
+    sprites: {
+      front_default: string
+    }
+  }
+}>()
 </script>
 
 <style lang="scss" scoped>
@@ -43,11 +39,13 @@ export default {
   border: 2px solid gray;
   padding: 15px;
   transition: 0.2s;
+
   &:hover {
-    border: 2px solid black;
+    box-shadow: 0 8px 16px rgb(0 0 0 / 10%);
     transition: 0.2s;
   }
 }
+
 .pocemon__img-wrapp {
   background: linear-gradient(to bottom, #ef5350 50%, #fff 50%);
   margin: 10px auto;
@@ -59,20 +57,26 @@ export default {
   border: 1px solid gray;
   border-radius: 50%;
   transition: 0.2s;
+
   &:hover {
     cursor: pointer;
     transform: scale(1.2);
     transition: 0.5s;
   }
 }
+
 .pocemon__img {
   width: 100%;
 }
+
 .pocemon__name {
   font-size: 22px;
   font-family: BungeeSpice-Regular;
 }
-.pocemon__types{
-  display: flex;flex-direction: column;align-items: center;
+
+.pocemon__types {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>

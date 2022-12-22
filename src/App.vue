@@ -1,16 +1,15 @@
 <template>
-  <div>
     <the-header />
     <router-view />
-  </div>
 </template>
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
 import TheHeader from "@/components/TheHeader.vue";
-export default {
+export default defineComponent({
   components: {
     TheHeader,
   },
-};
+})
 </script>
 <style lang="scss">
 @font-face {

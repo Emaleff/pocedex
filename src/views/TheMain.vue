@@ -2,14 +2,17 @@
   <the-pocemons-list />
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
 import ThePocemonsList from "@/components/ThePocemonsList.vue";
-export default {
+export default defineComponent({
   name: "TheMain",
   components: {
     ThePocemonsList,
   },
-};
+})
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>
