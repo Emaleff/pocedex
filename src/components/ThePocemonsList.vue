@@ -27,11 +27,12 @@ export default defineComponent({
     const isSmallLoader = computed(() => store.getters.isSmallLoader)
     const isLoading = computed(() => {
       if (getPocemons.value.length > 0) {
-        return  true;
+        return true;
       }
       return false;
     })
-    store.dispatch('loadPocemons', 1)
+    
+
     return {
       getPocemons, isFullPocemons, isSmallLoader, isLoading
     }
@@ -40,10 +41,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.observer {
-  height: 20px;
-}
-
 .list-enter-active,
 .list-leave-active {
   transition: all 1s ease;
@@ -61,6 +58,7 @@ export default defineComponent({
   grid-template-columns: repeat(auto-fit, 200px);
   justify-content: space-between;
   gap: 20px;
+  min-height: 80vh;
 
   @media screen and (max-width: 975px) {
     justify-content: center;

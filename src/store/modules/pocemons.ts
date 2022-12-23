@@ -16,13 +16,9 @@ export type MutationPayload = {
     updateCountPocemonPage: void;
     updateSmallLoader: boolean;
     setCurrentPage: number;
-    setCurrentListPocemons: number
 };
 
 export const mutations: MutationTree<State> & Mutations = {
-    setCurrentListPocemons(state, currentPage){
-        state.currentListPocemons = state.allPocemons.slice(state.countPocemonsPage * (currentPage -1), state.countPocemonsPage * currentPage)
-    },
     setCurrentPage(state, newCurrentPage) {
         state.currentPage = newCurrentPage
     },
@@ -34,11 +30,7 @@ export const mutations: MutationTree<State> & Mutations = {
     },
     addPocemons(state, pocemons) {
         if (Array.isArray(state.allPocemons) && Array.isArray(pocemons)) {
-            if (state.allPocemons.length === 1) {
-                state.allPocemons = pocemons
-            } else {
-                state.allPocemons = [...state.allPocemons, ...pocemons]
-            }
+                state.allPocemons =  pocemons
         }
     },
     updateFullPocemons({ fullPocemons }) {
@@ -72,8 +64,8 @@ export const getters: GetterTree<State, State> & Getters = {
     getTotalPage({ totalPage }) {
         return totalPage
     },
-    getPocemons({ currentListPocemons }) {
-        return currentListPocemons;
+    getPocemons({ allPocemons }) {
+        return allPocemons;
     },
     getCurrentPocemon({ currentPocemon }) {
         return currentPocemon;
@@ -91,7 +83,7 @@ export const getters: GetterTree<State, State> & Getters = {
  */
 
 export type ActionsPayload = {
-    loadPocemons: [payload: void, returnVal: void],
+    loadPocemons: [payload: number, returnVal: void],
     fetchCurrentPocemon: [payload: number, returnVal: void];
     changeCurrentPage: [payload: number, returnVal: void];
 };
@@ -102,10 +94,10 @@ export const actions: Actions = {
     async loadPocemons({ commit, state }) {
         commit("updateSmallLoader", true);
         const arrPocemons = [];
-        if (state.lastPocemonPage < 900) {
+        if (state.currentPage < 31) {
             for (
-                let i = state.startPocemonPage;
-                i <= 45;
+                let i = ((state.currentPage - 1) * state.countPocemonsPage) + 1;
+                i <= state.currentPage  * state.countPocemonsPage;
                 i++
             ) {
                 const { data } = await axios.get(
@@ -115,17 +107,15 @@ export const actions: Actions = {
             }
             commit("updateCountPocemonPage");
             commit("addPocemons", arrPocemons);
-            commit("setCurrentListPocemons", 1)
         } else {
-            for (let i = state.startPocemonPage; i <= state.limit; i++) {
+            for (let i = ((state.currentPage - 1) * state.countPocemonsPage) + 1; i <= state.limit; i++) {
                 const { data } = await axios.get(
                     `https://pokeapi.co/api/v2/pokemon/${i}`
                 );
                 arrPocemons.push(data);
             }
+            commit("updateCountPocemonPage");
             commit("addPocemons", arrPocemons);
-            commit("updateFullPocemons");
-            commit("updateSmallLoader", false);
         }
     },
     async fetchCurrentPocemon({ commit }, id: number) {
@@ -142,7 +132,6 @@ export const actions: Actions = {
     },
     changeCurrentPage({ commit }, newCurrentPage: number) {
         commit("setCurrentPage", newCurrentPage)
-        commit("setCurrentListPocemons", newCurrentPage )
     }
 };
 

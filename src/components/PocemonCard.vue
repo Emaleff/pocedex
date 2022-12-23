@@ -1,26 +1,27 @@
 <template>
-  <div class="pocemon__card">
-    <!-- <router-link :to="{ name: 'pocemonPage', params: { id: pocemon.id } }" > -->
-    <div class="pocemon__img-wrapp">
-      <img :src="props.pocemon.sprites.front_default" alt="" class="pocemon__img" />
-    </div>
-    <!-- </router-link> -->
-    <div class="pocemon__number"># {{ props.pocemon.id }}</div>
-    <div class="pocemon__name">{{ props.pocemon.name }}</div>
-    <div class="pocemon__types">
-      <pocemon-type v-for="types in props.pocemon.types" :types="types" :key="types.slot" />
-    </div>
+  <div class="pocemon__card" v-if="props.pocemon.id">
+    <router-link :to="{ name: 'pocemonPage', params: { id: props.pocemon.id } }">
+      <div class="pocemon__img-wrapp">
+        <img :src="props.pocemon.sprites.front_default" alt="" class="pocemon__img" />
+      </div>
+      <!-- </router-link> -->
+      <div class="pocemon__number"># {{ props.pocemon.id }}</div>
+      <div class="pocemon__name">{{ props.pocemon.name }}</div>
+      <div class="pocemon__types">
+        <pocemon-type v-for="types in props.pocemon.types" :types="types" :key="types.slot" />
+      </div>
+    </router-link>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { defineProps } from "vue";
-import {TPocemonTypes} from "../types/Tpocemons"
+import { TPocemonTypes } from "../types/Tpocemons"
 import PocemonType from "@/components/PocemonType.vue";
 const props = defineProps<{
   pocemon: {
     id: number,
-    name :string, 
+    name: string,
     types: TPocemonTypes,
     sprites: {
       front_default: string
