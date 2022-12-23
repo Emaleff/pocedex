@@ -15,14 +15,21 @@ export type MutationPayload = {
     updateFullPocemons: void;
     updateCountPocemonPage: void;
     updateSmallLoader: boolean;
+    setCurrentPage: number;
+    setCurrentListPocemons: number
 };
 
 export const mutations: MutationTree<State> & Mutations = {
+    setCurrentListPocemons(state, currentPage){
+        state.currentListPocemons = state.allPocemons.slice(state.countPocemonsPage * (currentPage -1), state.countPocemonsPage * currentPage)
+    },
+    setCurrentPage(state, newCurrentPage) {
+        state.currentPage = newCurrentPage
+    },
     updatePocemons(state, pocemons) {
         state.allPocemons = pocemons;
     },
     updateCurrentPocemons(state, pocemon) {
-        console.log('w')
         state.currentPocemon = pocemon;
     },
     addPocemons(state, pocemons) {
@@ -31,7 +38,6 @@ export const mutations: MutationTree<State> & Mutations = {
                 state.allPocemons = pocemons
             } else {
                 state.allPocemons = [...state.allPocemons, ...pocemons]
-                console.log(state.allPocemons, 'a')
             }
         }
     },
@@ -55,11 +61,19 @@ export type Getters = {
     getCurrentPocemon(state: State): any;
     isFullPocemons(state: State): any;
     isSmallLoader(state: State): boolean;
+    getCurrentPage(state: State): number;
+    getTotalPage(state: State): number;
 };
 
 export const getters: GetterTree<State, State> & Getters = {
-    getPocemons({ allPocemons }) {
-        return allPocemons;
+    getCurrentPage({ currentPage }) {
+        return currentPage
+    },
+    getTotalPage({ totalPage }) {
+        return totalPage
+    },
+    getPocemons({ currentListPocemons }) {
+        return currentListPocemons;
     },
     getCurrentPocemon({ currentPocemon }) {
         return currentPocemon;
@@ -79,6 +93,7 @@ export const getters: GetterTree<State, State> & Getters = {
 export type ActionsPayload = {
     loadPocemons: [payload: void, returnVal: void],
     fetchCurrentPocemon: [payload: number, returnVal: void];
+    changeCurrentPage: [payload: number, returnVal: void];
 };
 type data = {
 
@@ -90,7 +105,7 @@ export const actions: Actions = {
         if (state.lastPocemonPage < 900) {
             for (
                 let i = state.startPocemonPage;
-                i <= state.lastPocemonPage;
+                i <= 45;
                 i++
             ) {
                 const { data } = await axios.get(
@@ -100,6 +115,7 @@ export const actions: Actions = {
             }
             commit("updateCountPocemonPage");
             commit("addPocemons", arrPocemons);
+            commit("setCurrentListPocemons", 1)
         } else {
             for (let i = state.startPocemonPage; i <= state.limit; i++) {
                 const { data } = await axios.get(
@@ -113,21 +129,22 @@ export const actions: Actions = {
         }
     },
     async fetchCurrentPocemon({ commit }, id: number) {
-        if (id && id > 0 && id <= 904) {
-            try {
-                const { data } = await axios.get(
-                    `https://pokeapi.co/api/v2/pokemon/${id}`
-                );
+        try {
+            const { data } = await axios.get(
+                `https://pokeapi.co/api/v2/pokemon/${id}`
+            );
 
-                commit("updateCurrentPocemons", data);
-            } catch (e) {
-                console.log(e)
-                // throw new Error(e);
-            }
+            commit("updateCurrentPocemons", data);
+        } catch (e) {
+            console.log(e)
+            // throw new Error(e);
         }
     },
+    changeCurrentPage({ commit }, newCurrentPage: number) {
+        commit("setCurrentPage", newCurrentPage)
+        commit("setCurrentListPocemons", newCurrentPage )
+    }
 };
-
 
 
 /*

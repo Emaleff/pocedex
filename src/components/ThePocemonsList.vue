@@ -3,7 +3,7 @@
   <div class="container pocemon-list__container" v-else>
     <pocemon-card v-for="pocemon in getPocemons" :key="pocemon.id" :pocemon="pocemon" />
   </div>
-  <div ref="observer" class="observer"></div>
+  <the-pagination />
 </template>
 
 <script lang="ts">
@@ -11,12 +11,14 @@ import { defineComponent, computed } from "vue";
 import { useStore } from "@/store";
 import PocemonCard from "./PocemonCard.vue";
 import TheBigLoader from "./TheBigLoader.vue";
+import ThePagination from "@/components/ThePagination.vue";
 
 export default defineComponent({
   name: "ThePocemonsList",
   components: {
     PocemonCard,
     TheBigLoader,
+    ThePagination
   },
   setup() {
     const store = useStore();
@@ -24,11 +26,10 @@ export default defineComponent({
     const isFullPocemons = computed(() => store.getters.isFullPocemons)
     const isSmallLoader = computed(() => store.getters.isSmallLoader)
     const isLoading = computed(() => {
-      let isLoading = false;
       if (getPocemons.value.length > 0) {
-        isLoading = true;
+        return  true;
       }
-      return isLoading;
+      return false;
     })
     store.dispatch('loadPocemons', 1)
     return {
@@ -57,7 +58,6 @@ export default defineComponent({
 .pocemon-list__container {
   padding: 50px 0 100px;
   display: grid;
-  // grid-template-columns: repeat(4, 1fr);
   grid-template-columns: repeat(auto-fit, 200px);
   justify-content: space-between;
   gap: 20px;

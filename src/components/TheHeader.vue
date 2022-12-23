@@ -13,10 +13,12 @@
 .header {
   background-color: #ef5350;
 }
+
 .header__container {
   padding: 15px 0;
 }
-.header__logo{
-    width: 100px;
+
+.logo {
+  width: 100px;
 }
 </style>
