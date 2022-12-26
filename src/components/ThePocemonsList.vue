@@ -1,43 +1,24 @@
 <template>
-  <the-big-loader v-if="!isLoading" />
-  <div class="container pocemon-list__container" v-else>
+  <the-big-loader v-if="isLoading" />
+  <div class="container pocemon-list__container" >
     <pocemon-card v-for="pocemon in getPocemons" :key="pocemon.id" :pocemon="pocemon" />
   </div>
   <the-pagination />
 </template>
 
-<script lang="ts">
-import { defineComponent, computed } from "vue";
+<script lang="ts" setup>
+import { computed } from "vue";
 import { useStore } from "@/store";
 import PocemonCard from "./PocemonCard.vue";
 import TheBigLoader from "./TheBigLoader.vue";
 import ThePagination from "@/components/ThePagination.vue";
 
-export default defineComponent({
-  name: "ThePocemonsList",
-  components: {
-    PocemonCard,
-    TheBigLoader,
-    ThePagination
-  },
-  setup() {
     const store = useStore();
     const getPocemons = computed(() => store.getters.getPocemons)
-    const isFullPocemons = computed(() => store.getters.isFullPocemons)
-    const isSmallLoader = computed(() => store.getters.isSmallLoader)
-    const isLoading = computed(() => {
-      if (getPocemons.value.length > 0) {
-        return true;
-      }
-      return false;
-    })
+    const isLoading = computed(() =>  store.getters.getLoading)
     
 
-    return {
-      getPocemons, isFullPocemons, isSmallLoader, isLoading
-    }
-  },
-})
+
 </script>
 
 <style lang="scss" scoped>

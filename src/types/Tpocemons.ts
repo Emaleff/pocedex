@@ -14,4 +14,15 @@ export type TPocemonStat = {
         name: string
     }
 }
+
+export type TCurrentPocemon = {
+    id: number
+    name: string
+    sprites: {
+        front_default: string
+    }
+    types: TPocemonTypes[] 
+    stats: TPocemonStat[] 
+} 
+
 export type TPocemonStats = TPocemonStat[]

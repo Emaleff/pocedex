@@ -2,10 +2,10 @@
     <div class="mx-auto mb-20 flex justify-center text-gray-100">
         <button class="rounded-xl block bg-orange-500 px-3 py-1 mx-2 hover:bg-orange-900 hover:text-gray-100"
             v-for="page, index in totalPage" :key="`page-${page}`" :class="[index + 1 == currentPage ? 'bg-red-50 text-orange-900' : '',
-            index == 0 || (index >= currentPage - 2 && index <= currentPage) || index == 30 ? 'block' : 'hidden',
-            index == currentPage - 2 ? 'ml-8 dotted-left' : '',
-            index == currentPage ? 'mr-8 dotted-rigth' : '',
-            ]" @click="changePage(index)">
+index == 0 || (index >= currentPage - 2 && index <= currentPage) || index == 30 ? 'block' : 'hidden',
+index == currentPage - 2 && index != 0 ? 'ml-8 dotted-left' : '',
+index == currentPage && index != 30 ? 'mr-8 dotted-right' : '',
+]" @click="changePage(index)">
             {{ index + 1 }}
         </button>
     </div>
@@ -48,7 +48,6 @@ const changePage = (index: number) => {
 
     &-right {
         position: relative;
-        background: red!important;
 
         &::before {
             content: '';
