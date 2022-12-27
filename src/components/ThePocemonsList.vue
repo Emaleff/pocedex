@@ -1,6 +1,6 @@
 <template>
   <the-big-loader v-if="isLoading" />
-  <div class="container pocemon-list__container" >
+  <div class="container pocemon-list">
     <pocemon-card v-for="pocemon in getPocemons" :key="pocemon.id" :pocemon="pocemon" />
   </div>
   <the-pagination />
@@ -13,27 +13,16 @@ import PocemonCard from "./PocemonCard.vue";
 import TheBigLoader from "./TheBigLoader.vue";
 import ThePagination from "@/components/ThePagination.vue";
 
-    const store = useStore();
-    const getPocemons = computed(() => store.getters.getPocemons)
-    const isLoading = computed(() =>  store.getters.getLoading)
-    
+const store = useStore();
+const getPocemons = computed(() => store.getters.getPocemons)
+const isLoading = computed(() => store.getters.getLoading)
+
 
 
 </script>
 
 <style lang="scss" scoped>
-.list-enter-active,
-.list-leave-active {
-  transition: all 1s ease;
-}
-
-.list-enter-from,
-.list-leave-to {
-  opacity: 0;
-  transform: translateY(30px);
-}
-
-.pocemon-list__container {
+.pocemon-list {
   padding: 50px 0 100px;
   display: grid;
   grid-template-columns: repeat(auto-fit, 200px);

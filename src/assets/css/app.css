@@ -1,3 +1,198 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "BungeeSpice-Regular";
+  src: url("@/assets/fonts/BungeeSpice-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Stick-Regular";
+  src: url("@/assets/fonts/Stick-Regular.ttf");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  color: #2c3e50;
+  min-height: 100%;
+}
+
+.container {
+  max-width: 1110px;
+  margin: 0 auto;
+
+  @media screen and (max-width: 1150px) {
+    max-width: 96%;
+  }
+}
+
+.card-enter-active,
+.card-leave-active {
+  transition: all 1.3s ease;
+}
+
+.card-enter-from,
+.card-leave-to {
+  opacity: 0.2;
+  transform: translateY(130px);
+}
+
+.pocemon__container {
+  position: relative;
+}
+
+.back {
+  width: 120px;
+  height: 30px;
+  box-sizing: border-box;
+  position: absolute;
+  top: 30px;
+  right: 50px;
+  background: transparent;
+  border: 1px solid gray;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
+  @media screen and (max-width: 800px) {
+    top: 5px;
+    right: 15px;
+  }
+
+  @media screen and (max-width: 550px) {
+    width: 90px;
+    top: -15px;
+    right: 0;
+  }
+
+  span {
+    color: #444;
+  }
+}
+
+.back svg path {
+  fill: #444;
+}
+
+.back svg {
+  margin-right: 10px;
+  transition: 0.3s;
+}
+
+.back:hover {
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.293139);
+}
+
+.back:hover svg {
+  transform: scale(1.5);
+  transition: 0.3s;
+}
+
+.pocemon__wrapper {
+  margin: 30px auto 50px;
+  width: 800px;
+  height: 800px;
+  border: 1px solid gray;
+  border-radius: 50%;
+  background: linear-gradient(to bottom, #ef5350 50%, #fff 50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media screen and (max-width: 900px) {
+    width: 600px;
+    height: 600px;
+  }
+
+  @media screen and (max-width: 670px) {
+    width: 425px;
+    height: 425px;
+    margin: 50px auto;
+  }
+
+  @media screen and (max-width: 460px) {
+    width: 307px;
+    height: 307px;
+  }
+}
+
+.pocemon__id {
+  font-size: 12px;
+}
+
+.pocemon__name {
+  font-family: Stick-Regular;
+  margin-top: 20px;
+  margin-left: 5px;
+  font-size: 25px;
+}
+
+.pocemon__img-wrapper {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: wheat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25px;
+
+  @media screen and (max-width: 900px) {
+    width: 120px;
+    height: 120px;
+  }
+
+  @media screen and (max-width: 670px) {
+    width: 80px;
+    height: 80px;
+  }
+
+  @media screen and (max-width: 460px) {
+    width: 60px;
+    height: 60px;
+  }
+
+  img {
+    width: 100%;
+  }
+}
+
+.pocemon__types-wrapper {
+  margin-top: 20px;
+
+  @media screen and (max-width: 670px) {
+    margin-top: 5px;
+  }
+
+  @media screen and (max-width: 460px) {
+    display: flex;
+    margin-top: 14px;
+  }
+}
+
+.pocemon__stats-wrapp {
+  margin-top: 125px;
+
+  @media screen and (max-width: 900px) {
+    margin-top: 50px;
+  }
+
+  @media screen and (max-width: 670px) {
+    margin-top: 10px;
+  }
+
+  @media screen and (max-width: 460px) {
+    margin-top: 0;
+  }
+}

@@ -1,7 +1,7 @@
 <template>
-  <div class="pocemon__stats">
-    <span class="pocemon__stat-name">{{ props.stat.stat.name }}</span>
-    <span class="pocemon__stat-count">{{ props.stat.base_stat }}</span>
+  <div class="stat">
+    <span class="stat__name">{{ props.stat.stat.name }}</span>
+    <span class="stat__count">{{ props.stat.base_stat }}</span>
   </div>
 </template>
 
@@ -19,7 +19,7 @@ const props = defineProps<{
 </script>
 
 <style lang="scss" scoped>
-.pocemon__stats {
+.stat {
   width: 200px;
   display: flex;
   justify-content: space-between;
@@ -41,9 +41,7 @@ const props = defineProps<{
     line-height: 1.15;
     width: 130px;
   }
-}
-
-.pocemon__stat-name {
+  &__name {
   font-size: 18px;
   font-family: Stick-Regular;
 
@@ -56,7 +54,7 @@ const props = defineProps<{
   }
 }
 
-.pocemon__stat-count {
+&__count {
   font-family: BungeeSpice-Regular;
   font-size: 20px;
 
@@ -68,4 +66,7 @@ const props = defineProps<{
     font-size: 16px;
   }
 }
+}
+
+
 </style>

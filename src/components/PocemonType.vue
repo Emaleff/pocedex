@@ -1,5 +1,5 @@
 <template>
-  <div class="pocemon__type" :class="`pocemon__type--${props.types.type.name}`">
+  <div class="type" :class="`type--${props.types.type.name}`">
     {{ props.types.type.name }}
   </div>
 </template>
@@ -18,7 +18,7 @@ const props = defineProps<{
 </script>
 
 <style lang="scss" scoped>
-.pocemon__type {
+.type {
   text-align: center;
   border-radius: 5px;
   margin: 5px;
@@ -63,7 +63,7 @@ $colors: (
 
 @each $class,
 $color in $colors {
-  .pocemon__type--#{$class} {
+  .type--#{$class} {
     background: $color;
   }
 }

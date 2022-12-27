@@ -1,13 +1,13 @@
 <template>
-  <div class="pocemon__card" v-if="props.pocemon.id">
+  <div class="card" v-if="props.pocemon.id">
     <router-link :to="{ name: 'pocemonPage', params: { id: props.pocemon.id } }">
-      <div class="pocemon__img-wrapp">
+      <div class="card__img-wrapp">
         <img :src="props.pocemon.sprites.front_default" alt="" class="pocemon__img" />
       </div>
       <!-- </router-link> -->
-      <div class="pocemon__number"># {{ props.pocemon.id }}</div>
-      <div class="pocemon__name">{{ props.pocemon.name }}</div>
-      <div class="pocemon__types">
+      <div class="card__number"># {{ props.pocemon.id }}</div>
+      <div class="card__name">{{ props.pocemon.name }}</div>
+      <div class="card__types">
         <pocemon-type v-for="types in props.pocemon.types" :types="types" :key="types.slot" />
       </div>
     </router-link>
@@ -31,7 +31,7 @@ const props = defineProps<{
 </script>
 
 <style lang="scss" scoped>
-.pocemon__card {
+.card {
   justify-self: center;
   width: 200px;
   height: 300px;
@@ -45,39 +45,39 @@ const props = defineProps<{
     box-shadow: 0 8px 16px rgb(0 0 0 / 10%);
     transition: 0.2s;
   }
-}
 
-.pocemon__img-wrapp {
-  background: linear-gradient(to bottom, #ef5350 50%, #fff 50%);
-  margin: 10px auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100px;
-  height: 100px;
-  border: 1px solid gray;
-  border-radius: 50%;
-  transition: 0.2s;
+  &__img-wrapp {
+    background: linear-gradient(to bottom, #ef5350 50%, #fff 50%);
+    margin: 10px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    border: 1px solid gray;
+    border-radius: 50%;
+    transition: 0.2s;
 
-  &:hover {
-    cursor: pointer;
-    transform: scale(1.2);
-    transition: 0.5s;
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.2);
+      transition: 0.5s;
+    }
   }
-}
 
-.pocemon__img {
-  width: 100%;
-}
+  &__img {
+    width: 100%;
+  }
 
-.pocemon__name {
-  font-size: 22px;
-  font-family: BungeeSpice-Regular;
-}
+  &__name {
+    font-size: 22px;
+    font-family: BungeeSpice-Regular;
+  }
 
-.pocemon__types {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  &__types {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 </style>

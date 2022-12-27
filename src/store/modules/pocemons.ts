@@ -2,6 +2,7 @@ import axios from "axios"
 import { GetterTree, MutationTree, ActionContext, CommitOptions } from "vuex"
 import { initialState } from "../initialState"
 import { TCurrentPocemon } from "@/types/Tpocemons"
+import { load } from "@/api/http"
 
 
 /*
@@ -82,25 +83,21 @@ export const actions: Actions = {
         }
         commit("setLoading", true)
         commit("addPocemons", [])
-        const arrPocemons:TCurrentPocemon[] = []
+        const arrPocemons: TCurrentPocemon[] = []
         if (state.currentPage < 31) {
             for (
                 let i = ((state.currentPage - 1) * state.countPocemonsPage) + 1;
                 i <= state.currentPage * state.countPocemonsPage;
                 i++
             ) {
-                const responce: responce = await axios.get(
-                    `https://pokeapi.co/api/v2/pokemon/${i}`
-                )
-                arrPocemons.push(responce.data)
+                const data: TCurrentPocemon = await load(i)
+                arrPocemons.push(data)
             }
             commit("addPocemons", arrPocemons)
             commit("setLoading", false)
         } else {
             for (let i = ((state.currentPage - 1) * state.countPocemonsPage) + 1; i <= state.limit; i++) {
-                const { data } = await axios.get(
-                    `https://pokeapi.co/api/v2/pokemon/${i}`
-                )
+                const data = await load(i)
                 arrPocemons.push(data)
             }
             commit("addPocemons", arrPocemons)
